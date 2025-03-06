@@ -1,0 +1,42 @@
+<script>
+    
+    const board = [ 
+    {seq : 1 , title : '제목1', writer : "작성자1"},
+    {seq : 2 , title : '제목2', writer : "작성자2"},
+    {seq : 3 , title : '제목3', writer : "작성자3"},
+    {seq : 4 , title : '제목4', writer : "작성자4"},
+    {seq : 5 , title : '제목5', writer : "작성자5"},
+];
+
+//추가 - push, unshift
+
+//삭제 - pop(마지막),  shift(첫번째)
+//특정위치. 갯수 변화 없다
+//delete board[3];
+//alert(board);
+
+//board.splice(인덱스부터 , 몇개);
+board.splice(4 , 1);
+
+
+//board.splice(1, 10);
+//board.splice(0);
+for(let i=0; i < board.length; i++){
+    document.write(board[i].title + "<br>");
+}
+
+// filter
+//let testboard = 1;
+//let newboard = board.filter(function(otherboard){  return  otherboard.seq != testboard;   })
+//document.write(newboard.length + "<br>");
+</script>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+
+ let a = "공백으로 문자열을 분리합니다".split(' ');
+ document.write(`<h3> ${typeof(a) } </h3>`); //배열도 일종 객체 취급.object
+ document.write(`<h3> ${a.constructor.name } </h3>`); //배열도 일종 객체 취급.Array
+ document.write(`<h3> ${a.length } </h3>`);
+ 
+ /*let str1 = a[0];
+ let str2 = a[1];
+ let str3 = a[2];
+ */
+ 
+ //비구조 할당 문법-배열 구조 분해. 각 변수 문자열 
+ /* let [str1, str2, str3] = "공백으로 문자열을 분리합니다".split(' ');
+  document.write(`<h3> ${typeof(str1) } : ${str1} </h3>`); 
+  document.write(`<h3> ${typeof(str2) } : ${str2}  </h3>`);
+  document.write(`<h3> ${typeof(str3) } : ${str3} </h3>`);
+ */ 
+  
+ // ...연산자 = 비구조화 할당 잔여 연산자
+ /*let [str1, str2, str3,  ...str4] = "공백으로 문자열을 분리하여 각각의 문자열변수에 저장합니다".split(' ');
+ document.write(`<h3> ${typeof(str1) } : ${str1} </h3>`); //문자열
+ document.write(`<h3> ${typeof(str2) } : ${str2}  </h3>`);
+ document.write(`<h3> ${typeof(str3) } : ${str3} </h3>`); 
+ document.write(`<h3> ${typeof(str4) } : ${str4} </h3>`); //배열
+ */
+ 
+ // ...연산자 = 객체 복사 연산자
+/*let originemp = {id:100, name:"김사원",dept:"인재개발부"};
+//let copyemp = originemp;//객체내부데이터 공유
+let copyemp = {...originemp};//복사본 1개 전달. 원본 유지
+copyemp.name ="박대리";
+document.write(`<h3> ${copyemp.name} </h3>`);//박대리
+document.write(`<h3> ${originemp.name} </h3>`);//김사원????
+//변수명1 = 변수명2; //변수명2에 데이터를 변수명1에 대입(변수명2데이터저장 메모리 주소 전달)
+*/
+
+//배열 메소드
+/* push(), unshift(), pop(), shift(), 조회-forEach / map /  */
+
+let boardlist = [
+    {seq:'1', title:'제목1', writer:"작성자1", view:"10"},
+    {seq:'2', title:'제목2', writer:"작성자2", view:"11"},
+    {seq:'3', title:'제목3', writer:"작성자3", view:"30"},
+    {seq:'4', title:'제목4', writer:"작성자4", view:"55"},
+    {seq:'5', title:'제목5', writer:"작성자5", view:"0"}
+]; 
+
+//컬백함수내용 실행만 할 뿐. 결과 리턴 x
+/*let boardtable = `<table border=3>`;
+boardlist.forEach(function(data, index){
+	boardtable += `<tr><td>${data.seq}</td><td>${data.title}</td><td>${data.writer}</td><td>${data.view}</td></tr>`;
+});
+boardtable += `</table>`;
+document.write(boardtable);
+*/
+
+
+//컬백함수내용 실행한 결과를 반복시마다 모아서 결과 리턴 o
+/*let boardlist2 = boardlist.map(function(data, index){
+	return `<tr><td>${data.seq}</td><td>${data.title}</td><td>${data.writer}</td><td>${data.view}</td></tr>`;
+});
+
+document.write(boardlist2);//5개 tr.태그
+*/
+
+//리액트 프로그램 함수 마지막 리턴값 1개 가능
+// 배열 반복시 여러개의 리턴값 불가능
+// 함수 리턴값 조건에 따라 다른 경우-if/else 블록 사용하지 않고 조건3항연산자 (a?b:c )
+function test(i){
+	//return 	if(i >=100){ i;  } 	else { 100;}
+	return i >= 100? i : 100;
+}
+document.write(test(101)+"<br>");
+document.write(test(99)+"<br>");
+
+//함수 형태
+/*//익명함수
+let anony1 = function(){document.write("익명함수호출<br>");} 
+
+//함수선언식
+function func1(){document.write("유명함수호출<br>");} 
+
+//화살표함수
+let arrow1 = ()=>{document.write("화살표함수호출<br>");} 
+
+anony1();
+func1();
+arrow1();
+*/
+
+let anony2 = function(i){document.write("익명함수호출"+ i + "<br>");} 
+let arrow2 = i=>{document.write("arrow2함수호출"+ i + "<br>");}//매개변수 1개인 화살표 () 없이 매개변수명 표현 가능
+
+let arrow3 = (i,j)=>document.write("arrow3함수호출"+ i*j + "<br>");//문장 1개 포함 {} 없이 표현 가능
+
+let arrow4 = i=> i*i; //문장 1개 포함하고 return문이면 return키워드 없이 표현 가능
+
+arrow2(100);
+
+arrow3(10, 2);
+
+let save4 = arrow4(5);
+document.write(`화살표함수에서 리턴값=${save4}`);
+
+//import / export 
+// class 문법
+//자바스크립트 객체 문장
+/*
+//객체생성1 = 미리 값 지정하고 객체 생성=객체 literal 형식 표현
+let obj1 = {id:100 , name:"홍길동", dept:"it", print:function(){ }};
+let obj2 = {id:200 , name:"김사원", dept:"총무부", print:function(){ }};
+alert(obj1.id + ":" + obj1.name + ":" + obj1.dept);
+alert(obj2.id + ":" + obj2.name + ":" + obj2.dept);
+
+//객체생성2 = 생성자함수 정의-호출  이용(반복 같은 속성과 메소드 가진 객체 여러번 생성)
+function Emp(id, name, dept){
+	this.id = id;
+	this.name = name;
+	this.dept = dept;
+	this.print = function(){}
+}
+
+let emp1 = new Emp(100, "홍길동", "it");
+let emp2 = new Emp(200, "김사원", "총무부");
+alert(emp1.id + ":" + emp1.name + ":" + emp1.dept);
+alert(emp2.id + ":" + emp2.name + ":" + emp2.dept);
+*/
+
+//객체생성3=class=ecma script 6
+
+//함수처럼 정의 + 호출 이용
+class Employee{
+	constructor(id, name, dept){
+		this.id = id;
+		this.name = name;
+		this.dept = dept;
+	}
+	
+	print(){
+		document.write(`<h3>회사원의 사번 = ${this.id} , 이름 = ${this.name} , 부서 = ${this.dept} </h3>`);
+	}
+}
+
+let emp3 = new Employee(100, "홍길동", "it");
+let emp4 = new Employee(200, "김사원", "총무부");
+//emp3.print();
+//emp4.print();
+
+
+class Manager extends Employee { //Manager 클래스는 Employee 상속받는다
+	constructor(id, name, dept, managingpart){
+		super(id, name, dept);
+		this.managingpart = managingpart;
+	}
+	
+	printManager(){
+		document.write(`<h3>관리업무 = ${this.managingpart} </h3>`);
+	}
+}
+
+let man1 = new Manager(300, "박한국", "it", "it업무매니저");
+man1.print();//상속
+man1.printManager();//구현 추가
+
+alert`출력`;
+
+//배열 splice
+const board = [ 
+        {seq : 1 , title : '제목1', writer : "작성자1"},
+        {seq : 2 , title : '제목2', writer : "작성자2"},
+        {seq : 3 , title : '제목3', writer : "작성자3"},
+        {seq : 4 , title : '제목4', writer : "작성자4"},
+        {seq : 5 , title : '제목5', writer : "작성자5"},
+      ];
+
+
+	 // let random = parseInt(0.5555 * 3);
+	 // alert(random);
+
+	// let product = {code : '0001', name : "상품명1", price : 1000.50 }
+	// let product = `{"code" : "0001", "name" : "상품명1", "price" : 1000.50}`
+	//let product = JSON.parse(`{"code" : "0001", "name" : "상품명1", "price" : 1000.50}`);
+	let product = {"code" : "0001", "name" : "상품명1", "price" : 1000.50}
+
+	 document.write(`<h3>${product.code}</h3>`);
+
+	 "var square = function(x) { return x * x; }; var result = square(5); "
+	 
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+

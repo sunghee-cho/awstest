@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type=button value="확인"> <div id="test"></div>
+<script>
+//test1 member item 출력
+//document.querySelector("div").innerHTML += "<h3>"+localStorage.getItem("member1") +"</h3>";
+
+/*
+//test2 
+//localStorage.setItem("member1", 'id:testid1,pw:1111,name:홍길동'); 으로 저장시 member의 내용을 , 와 : 으로 분리하여 id, pw, name값만 출력 
+let memberarray = localStorage.getItem("member").split(",");
+let map = memberarray.map(function(data){
+	let dataarray = data.split(":");
+	return dataarray[1];
+});
+document.querySelector("div").innerHTML += "<h3>"+map+"</h3>";
+*/
+
+/*
+//test3 member의 내용을 localStorage.setItem("member1", JSON.stringify(inputmember)); 형식으로 저장시
+//{"id":"id1","pw":"1111","name":"강바다"} 와 같은 형태이므로
+
+let memberarray = localStorage.getItem("member1").split(/\{|\}|:|,|\"/); //분리자에 {},:\" 포함한다
+let map = memberarray.map(function(data, index){ return "<h3>"+index+":"+data+"</h3>" }); 
+document.querySelector("div").innerHTML = map;// 출력해보면 5, 11, 17번인덱스에 입력한 값들이 있음을 알 수 있다.
+//최종적으로 아래와 같이 입력 id, pw, name만 가져와 출력
+document.querySelector("div").innerHTML = memberarray[5] +":"+memberarray[11]+":"+memberarray[17];
+*/
+
+//test4 localStorage 내부의 모든 item 출력하기key 이름 찾기(지금은 localStorage의 모든 item이 회원가입정보 저장한 것으로 간주하고 )
+
+
+
+console.log(localStorage.length);//localStorage 저장문자열 갯수
+for(let i = 0; i < localStorage.length; i++){
+	//해당 인덱스의 localStorage에 대해 key 이름 찾고 해당 key에 대한 데이터 찾아 출력
+	//let memberarray2 = localStorage.getItem(localStorage.key(i)).split(/\{|\}|:|,|\"/);
+	
+	//document.querySelector("div").innerHTML += "<h3 color=red>" + localStorage.key(i)+ " => " + memberarray2 ;
+		//"<h3 color=red>"+localStorage.key(i)+" => "+memberarray2[5] +" : "+memberarray2[11]+" : "+memberarray2[17]+"</h3>";
+
+	let memberarray2 = JSON.parse(localStorage.getItem(localStorage.key(i)));
+	document.querySelector("div").innerHTML += `<h3 color=red>${memberarray2.id} : ${memberarray2.pw} : ${memberarray2.name}</h3>`;
+}
+
+//test5 - 참고!!!!
+//setItem으로 객체를 저장해도 getItem으로 읽어오면 string으로 인식. 
+// 그래서 `{}`형식으로 json형식으로 setItem한 후 JSON.parse( localStorage.getItem(...)) 형식으로 객체 복원
+/*localStorage.setItem("membertest",`{"id":"test5","pw":5555, "name":"최산"}`);
+let memberarray2 = localStorage.getItem(localStorage.key(0));//string으로 인식
+memberarray2 = JSON.parse( localStorage.getItem(localStorage.key(0) ) );//객체로 인식
+document.querySelector("div").innerHTML += 
+`<h3 style='color:red'>${localStorage.key(0)}==${memberarray2.id} : ${memberarray2.pw} : ${memberarray2.name}</h3>
+<h3 style='color:blue'>${localStorage.key(0)}==${typeof(memberarray2)}</h3>`;
+*/
+</script>
+</body>
+</html>
+
+
+

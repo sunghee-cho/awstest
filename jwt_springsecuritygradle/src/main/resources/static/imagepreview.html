@@ -1,0 +1,29 @@
+<input id="upload" type = "file" accept = "image/*"   onChange = "onchangeImageUpload(event)">
+<input id="upload" type = "file" accept = "image/*"  onChange = "onchangeImageUpload(event)">
+<hr/>
+이미지 미리보기 <img src="http://localhost:4000/favicon.ico"> /* 현재컴포넌트에서 서버로 업로드하기전 이미지 확인 */
+<script>
+    const onchangeImageUpload = function(e){
+      //  alert(e.target)
+       const {files} = e.target;
+       const uploadFile = e.target.files[0];//(1개의 file type에서 복수개선택가능시) 선택한 첫번째파일
+       const reader = new FileReader();
+       reader.readAsDataURL(uploadFile);
+       reader.onloadend = ()=> {
+       // document.querySelector("img").src = "http://localhost:4000/logo192.png";
+       document.querySelector("img").src = reader.result;
+       }
+  }
+  
+  /*document.getElementById("upload").onChange =function(e){
+      //  alert(e.target)
+       const {files} = e.target;
+       const uploadFile = files[0];
+       const reader = new FileReader();
+       reader.readAsDataURL(uploadFile);
+       reader.onloadend = ()=> {
+       // document.querySelector("img").src = "http://localhost:4000/logo192.png";
+       document.querySelector("img").src = reader.result;
+       }
+  }*/
+  </script>     

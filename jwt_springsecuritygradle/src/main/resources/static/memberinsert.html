@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="test"></div>
+아이디<input type=text id="id">
+암호<input type=text id="pw">
+이름<input type=text id="name">
+<input type=button value="회원가입" id=btn>
+<script>
+let index = 1;
+let btn = document.querySelector("#btn");
+btn.addEventListener('click', function(){
+let id = document.querySelector("#id").value;
+let pw = document.querySelector("#pw").value;
+let name = document.querySelector("#name").value;
+let inputmember = {id: id, pw:pw, name:name};//입력값 객체로 생성
+localStorage.setItem("member"+index++, JSON.stringify(inputmember));//JSON.stringify로 객체를 문자열화
+document.querySelector("div").innerHTML += "<h3>"+JSON.stringify(inputmember) +" 회원 가입 완료 </h3>";
+});
+
+//브라우저 - 검사 - 애플리케이션 - 저장용량 - 로컬 스토리지 - url파일명 혹은 file:// 열면 setItem 내용 나온다. 
+//localStorage의 만료시간은 별도 설정이 없으면 무제한이다.
+//만료시간 설정은 let inputmember = {expire : Date.now() + 유효만료밀리세컨드,  id: id, pw:pw, name:name}; 처럼 만료시간 저장 변수 1개 더 추가
+/*만료시간 확인은
+// 현재 시간과 localStorage의 expire 시간 비교  if(Date.now() > obj.expire) {    // 만료시간이 지난 item 삭제    window.localStorage.removeItem(keyName);    
+출처: https://hianna.tistory.com/698 [어제 오늘 내일:티스토리]
+*/
+//localStorage에는 json객체 저장이 아닌 문자열 데이터만 가능하므로 JSON.stringify(json객체) 형태로 저장한다.
+/*localStorage.setItem("member", 'id:testid1,pw:1111,name:홍길동');
+localStorage.setItem("member1", 'id:testid1,pw:1111,name:홍길동');
+localStorage.setItem("member2", 'id:testid1,pw:1111,name:홍길동');
+localStorage.setItem("member3", 'id:testid1,pw:1111,name:홍길동');
+localStorage.setItem("member4", 'id:testid1,pw:1111,name:홍길동');
+localStorage.setItem("member5", 'id:testid1,pw:1111,name:홍길동');
+*/
+</script>
+</body>
+</html>
+
+
+
